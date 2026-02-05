@@ -645,12 +645,14 @@ header {
     width: 100%;
 }
 
+
 /* --------------------------------------------------
    FOOTER
 -------------------------------------------------- */
 footer {
     background-color: #082d46;
-    color: #acc1cf;
+    color: #ffffff;
+    /* pure white */
     padding: 80px 0 0;
     margin-top: auto;
 }
@@ -663,17 +665,29 @@ footer {
 }
 
 .footer-col h3 {
-    color: var(--white);
+    color: #ffffff;
     margin-bottom: 25px;
     font-size: 18px;
+}
+
+.footer-col p {
+    color: #ffffff;
+    opacity: 0.9;
 }
 
 .footer-col ul li {
     margin-bottom: 15px;
 }
 
+.footer-col ul li a {
+    color: #ffffff;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
 .footer-col ul li a:hover {
     color: var(--secondary-color);
+    opacity: 1;
 }
 
 .social-icons {
@@ -690,7 +704,7 @@ footer {
     justify-content: center;
     border-radius: 50%;
     transition: var(--transition);
-    color: var(--white);
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -703,6 +717,8 @@ footer {
     padding: 20px 0;
     text-align: center;
     font-size: 14px;
+    color: #ffffff;
+    opacity: 0.7;
 }
 
 /* --------------------------------------------------
@@ -1138,5 +1154,277 @@ body {
 
     .split-content {
         padding: 40px 20px;
+    }
+}
+
+/* --------------------------------------------------
+   AROGYA / DISEASE SECTION
+-------------------------------------------------- */
+.disease-section {
+    background-color: #f8f9fa;
+    min-height: 80vh;
+}
+
+.disease-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Sidebar */
+.disease-sidebar {
+    flex: 0 0 300px;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    top: 100px;
+    /* Adjust based on header height */
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.sidebar-sticky h3 {
+    font-size: 1.2rem;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.disease-list li {
+    margin-bottom: 10px;
+}
+
+.disease-btn {
+    width: 100%;
+    text-align: left;
+    padding: 12px 15px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--dark-text);
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.disease-btn:hover {
+    background-color: #eef5f9;
+    color: var(--primary-color);
+}
+
+.disease-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 6px rgba(11, 60, 93, 0.2);
+}
+
+/* Content Area */
+.disease-content-area {
+    flex: 1;
+}
+
+.content-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.lang-toggle-container {
+    background: var(--white);
+    padding: 5px;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 10px;
+    color: var(--light-text);
+}
+
+.lang-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--light-text);
+    transition: var(--transition);
+}
+
+.lang-btn.active {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.disease-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    min-height: 400px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.disease-title {
+    color: #e74c3c;
+    /* Red accent as requested */
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.disease-section-title {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.disease-text {
+    color: var(--dark-text);
+    /* Dark grey */
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.symptom-list,
+.avoid-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.symptom-list li,
+.avoid-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+    color: var(--dark-text);
+}
+
+.symptom-list li::before {
+    content: '•';
+    color: #e74c3c;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+}
+
+.avoid-list li::before {
+    content: '×';
+    color: #c0392b;
+    font-weight: bold;
+    position: absolute;
+    left: 2px;
+    font-size: 1.2em;
+}
+
+.treatment-box {
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.medical-note {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 25px;
+    border: 1px solid #ffeeba;
+    font-weight: 500;
+}
+
+.medical-disclaimer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    background: #f9f9f9;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.placeholder-content {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--light-text);
+}
+
+.placeholder-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .disease-layout {
+        flex-direction: column;
+    }
+
+    .disease-sidebar {
+        width: 100%;
+        flex: none;
+    }
+
+    .sidebar-sticky {
+        position: static;
+        margin-bottom: 30px;
+    }
+
+    .disease-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .disease-list li {
+        width: auto;
+        flex: 1 0 45%;
+    }
+
+    .content-header {
+        justify-content: center;
+        /* Center toggle on mobile */
+    }
+}
+
+@media (max-width: 600px) {
+    .disease-list li {
+        width: 100%;
+        flex: 1 0 100%;
+    }
+
+    .disease-card {
+        padding: 25px;
+    }
+
+    .disease-title {
+        font-size: 1.8rem;
     }
 }

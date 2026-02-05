@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers - Novarance Pharmaceuticals Pvt Ltd</title>
+    <title>Arogya - Health Information - Novarance Pharmaceuticals</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -34,7 +36,7 @@
                     <li><a href="products.html" class="nav-link">Products</a></li>
                     <li><a href="manufacturing.html" class="nav-link">Manufacturing</a></li>
                     <li><a href="quality.html" class="nav-link">Quality</a></li>
-                    <li><a href="arogya.html" class="nav-link">Arogya</a></li>
+                    <li><a href="arogya.html" class="nav-link active">Arogya</a></li>
                     <li><a href="contact.html" class="nav-link btn-contact">Contact Us</a></li>
                 </ul>
             </nav>
@@ -46,53 +48,51 @@
         </div>
     </header>
 
-    <!-- Page Header -->
-    <div class="page-header">
+    <!-- Main Content -->
+    <section class="section disease-section">
         <div class="container">
-            <h1>Join Our Team</h1>
-            <p>Grow your career with one of India's fastest-growing pharma companies</p>
-        </div>
-    </div>
-
-    <!-- Job Application Form Section -->
-    <section class="section bg-light">
-        <div class="container text-center">
-            <div class="section-header reveal">
-                <h2>Current Openings</h2>
+            <div class="section-header">
+                <h2>Health Guide & Awareness</h2>
                 <div class="line"></div>
-                <p>We are looking for talented Medical Representatives and Area Managers.</p>
+                <p>Reliable information for a healthier life.</p>
             </div>
 
-            <div class="simple-form reveal slide-up">
-                <h3 style="text-align: center; margin-bottom: 20px;">Apply Now</h3>
-                <form id="careerForm">
-                    <div class="form-group">
-                        <label for="c-name">Full Name</label>
-                        <input type="text" id="c-name" required placeholder="Enter your full name">
+            <div class="disease-layout">
+                <!-- Left Sidebar: Disease List -->
+                <aside class="disease-sidebar">
+                    <div class="sidebar-sticky">
+                        <h3>Health Topics</h3>
+                        <ul class="disease-list" id="disease-list">
+                            <!-- Items will be injected dynamically via JS -->
+                        </ul>
                     </div>
-                    <div class="form-group">
-                        <label for="c-email">Email Address</label>
-                        <input type="email" id="c-email" required placeholder="Enter your email">
+                </aside>
+
+                <!-- Right Panel: Disease Detail -->
+                <main class="disease-content-area">
+                    <div class="content-header">
+                        <div class="lang-toggle-container">
+                            <span class="lang-label">Language:</span>
+                            <button id="btn-hindi" class="lang-btn">हिंदी</button>
+                            <button id="btn-english" class="lang-btn active">English</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="c-phone">Phone Number</label>
-                        <input type="tel" id="c-phone" required placeholder="Enter your mobile number">
+
+                    <div id="disease-detail-view" class="disease-card">
+                        <!-- Dynamic Content loads here -->
+                        <div class="placeholder-content">
+                            <h3>Select a topic to read more</h3>
+                            <p>Choose a disease or health topic from the list to view detailed information.</p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="c-position">Position Applied For</label>
-                        <select id="c-position">
-                            <option>Medical Representative (MR)</option>
-                            <option>Area Sales Manager (ASM)</option>
-                            <option>Regional Sales Manager (RSM)</option>
-                            <option>Office Administration</option>
-                        </select>
+
+                    <div class="medical-disclaimer">
+                        <p><strong>Disclaimer:</strong> This information is for educational purposes only and is not a
+                            substitute for professional medical advice, diagnosis, or treatment. Always seek the advice
+                            of your physician or other qualified health provider with any questions you may have
+                            regarding a medical condition.</p>
                     </div>
-                    <div class="form-group">
-                        <label for="c-resume">Upload Resume (PDF only)</label>
-                        <input type="file" id="c-resume" accept=".pdf,.doc,.docx">
-                    </div>
-                    <button type="submit" class="btn btn-primary full-width">Submit Application</button>
-                </form>
+                </main>
             </div>
         </div>
     </section>
@@ -111,7 +111,7 @@
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="quality.html">Quality Policy</a></li>
-                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="arogya.html">Arogya</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
@@ -131,6 +131,7 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/health.js"></script>
 </body>
 
 </html>
