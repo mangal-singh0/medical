@@ -25,7 +25,7 @@
                             stroke-linejoin="round" />
                     </svg>
                 </span>
-                Novarance Pharma
+                Novarance Pharmaceuticals
             </a>
             <nav class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
@@ -58,6 +58,242 @@
     <section class="section products bg-light">
         <div class="container">
 
+            <!-- Products-only styling (scoped to this section) -->
+            <style>
+                .products .product-card {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                }
+
+                .products .product-img {
+                    height: 220px;
+                    overflow: hidden;
+                    background: #eef5f9;
+                }
+
+                .products .product-media {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .products .product-media img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .products .product-media .placeholder-icon {
+                    width: 64px;
+                    height: 64px;
+                    opacity: 0.35;
+                }
+
+                .products .product-info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    flex: 1;
+                }
+
+                .products .product-info p {
+                    margin-bottom: 0;
+                }
+
+                .products .product-meta {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+                    margin-top: auto;
+                    padding-top: 6px;
+                }
+
+                .products .pill-tag {
+                    font-size: 12px;
+                    font-weight: 700;
+                    padding: 6px 10px;
+                    border-radius: 999px;
+                    background: rgba(11, 60, 93, 0.08);
+                    color: var(--primary-color);
+                    border: 1px solid rgba(11, 60, 93, 0.12);
+                    white-space: nowrap;
+                }
+
+                /* Product details modal (scoped) */
+                .products .product-modal-backdrop {
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.55);
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 18px;
+                    z-index: 2500;
+                }
+
+                .products .product-modal-backdrop.active {
+                    display: flex;
+                }
+
+                .products .product-modal {
+                    width: min(980px, 100%);
+                    max-height: 90vh;
+                    overflow: auto;
+                    background: var(--white);
+                    border-radius: 14px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+                }
+
+                .products .product-modal-header {
+                    position: sticky;
+                    top: 0;
+                    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                    color: var(--white);
+                    padding: 18px 18px 14px;
+                    border-top-left-radius: 14px;
+                    border-top-right-radius: 14px;
+                    z-index: 1;
+                }
+
+                .products .product-modal-header-top {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    gap: 12px;
+                }
+
+                .products .product-modal-title {
+                    margin: 0;
+                    font-size: 1.35rem;
+                    color: var(--white);
+                    line-height: 1.25;
+                }
+
+                .products .product-modal-subtitle {
+                    margin: 6px 0 0;
+                    color: rgba(255, 255, 255, 0.88);
+                    font-size: 0.95rem;
+                }
+
+                .products .product-modal-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+                }
+
+                .products .lang-select {
+                    background: rgba(255, 255, 255, 0.14);
+                    border: 1px solid rgba(255, 255, 255, 0.28);
+                    color: var(--white);
+                    border-radius: 999px;
+                    padding: 8px 12px;
+                    font-weight: 600;
+                    font-size: 13px;
+                    outline: none;
+                }
+
+                .products .lang-select option {
+                    color: #111;
+                }
+
+                .products .modal-close {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255, 255, 255, 0.28);
+                    background: rgba(255, 255, 255, 0.14);
+                    color: var(--white);
+                    font-size: 22px;
+                    line-height: 1;
+                    cursor: pointer;
+                    transition: var(--transition);
+                }
+
+                .products .modal-close:hover {
+                    background: rgba(255, 255, 255, 0.22);
+                    transform: translateY(-1px);
+                }
+
+                .products .product-modal-body {
+                    padding: 18px;
+                }
+
+                .products .detail-grid {
+                    display: grid;
+                    grid-template-columns: 1.15fr 0.85fr;
+                    gap: 18px;
+                }
+
+                .products .detail-card {
+                    background: var(--white);
+                    border-radius: 12px;
+                    border: 1px solid var(--border-color);
+                    box-shadow: var(--shadow);
+                    padding: 16px;
+                }
+
+                .products .detail-card h4 {
+                    margin: 0 0 10px;
+                    font-size: 1.05rem;
+                }
+
+                .products .kv {
+                    display: grid;
+                    grid-template-columns: 160px 1fr;
+                    gap: 10px 14px;
+                    margin: 0;
+                }
+
+                .products .kv dt {
+                    font-weight: 700;
+                    color: var(--primary-color);
+                }
+
+                .products .kv dd {
+                    margin: 0;
+                    color: var(--dark-text);
+                }
+
+                .products .detail-list {
+                    margin: 10px 0 0;
+                    padding-left: 18px;
+                    color: var(--dark-text);
+                }
+
+                .products .detail-list li {
+                    margin-bottom: 8px;
+                }
+
+                .products .compliance-note {
+                    margin-top: 12px;
+                    padding: 12px 14px;
+                    border-radius: 10px;
+                    background: #fff3cd;
+                    border: 1px solid #ffeeba;
+                    color: #6c5200;
+                    font-weight: 600;
+                }
+
+                @media (max-width: 860px) {
+                    .products .detail-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .products .kv {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+
             <div class="category-tabs reveal">
                 <button class="tab-btn active" data-category="all">All</button>
                 <button class="tab-btn" data-category="tablets">Tablets</button>
@@ -66,79 +302,446 @@
                 <button class="tab-btn" data-category="injectables">Injectables</button>
             </div>
 
-            <div class="product-grid">
-                <!-- Product 1 -->
-                <div class="product-card reveal zoom-in" data-category="tablets">
-                    <div class="product-img">
-                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                        <span class="category-tag">Tablet</span>
-                    </div>
-                    <div class="product-info">
-                        <h3>Novaclav-625</h3>
-                        <p>Amoxycillin & Potassium Clavulanate Tablets IP</p>
-                        <button class="btn-text">View Details &rarr;</button>
-                    </div>
-                </div>
+            <div class="product-grid" id="product-grid">
+                <!-- Products cards are injected by the catalogue script below -->
+            </div>
 
-                <!-- Product 2 -->
-                <div class="product-card reveal zoom-in" data-category="capsules">
-                    <div class="product-img">
-                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                        <span class="category-tag">Capsule</span>
+            <!-- Product Details Modal (for "View Details") -->
+            <div class="product-modal-backdrop" id="product-modal-backdrop" aria-hidden="true">
+                <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+                    <div class="product-modal-header">
+                        <div class="product-modal-header-top">
+                            <div>
+                                <h3 class="product-modal-title" id="product-modal-title">Product Details</h3>
+                                <p class="product-modal-subtitle" id="product-modal-subtitle">Educational information only</p>
+                            </div>
+                            <div class="product-modal-actions">
+                                <select class="lang-select" id="product-lang" aria-label="Language">
+                                    <option value="en" selected>English</option>
+                                    <option value="hi">हिंदी</option>
+                                    <option value="ta">தமிழ்</option>
+                                    <option value="te">తెలుగు</option>
+                                    <option value="bn">বাংলা</option>
+                                    <option value="mr">मराठी</option>
+                                    <option value="gu">ગુજરાતી</option>
+                                    <option value="kn">ಕನ್ನಡ</option>
+                                </select>
+                                <button class="modal-close" id="product-modal-close" aria-label="Close">&times;</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3>Rabnova-DSR</h3>
-                        <p>Rabeprazole Sodium & Domperidone Capsules</p>
-                        <button class="btn-text">View Details &rarr;</button>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card reveal zoom-in" data-category="syrups">
-                    <div class="product-img">
-                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                        <span class="category-tag">Syrup</span>
-                    </div>
-                    <div class="product-info">
-                        <h3>Novacough-DX</h3>
-                        <p>Dextromethorphan Hydrobromide Syrup</p>
-                        <button class="btn-text">View Details &rarr;</button>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card reveal zoom-in" data-category="injectables">
-                    <div class="product-img">
-                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                        <span class="category-tag">Injectable</span>
-                    </div>
-                    <div class="product-info">
-                        <h3>Pantanova-IV</h3>
-                        <p>Pantoprazole Injection 40mg</p>
-                        <button class="btn-text">View Details &rarr;</button>
-                    </div>
+                    <div class="product-modal-body" id="product-modal-body"></div>
                 </div>
             </div>
+
+            <script>
+                (function () {
+                    // --------------------------------------------------
+                    // Catalogue data + multilingual details (Products only)
+                    // --------------------------------------------------
+                    const SUPPORTED_LANGS = ['en', 'hi', 'ta', 'te', 'bn', 'mr', 'gu', 'kn'];
+
+                    const labels = {
+                        en: {
+                            medicineName: "Medicine Name",
+                            category: "Category",
+                            dosageForm: "Dosage Form",
+                            whatFor: "What this medicine is for",
+                            whyUsed: "Why it is used",
+                            conditions: "Common medical conditions treated",
+                            usage: "Usage instructions (general, non-prescriptive)",
+                            sideEffects: "Possible side effects",
+                            disclaimerText: "Use only under medical supervision",
+                            subtitle: "Educational information only • No dosage or prescription advice",
+                        },
+                        hi: {
+                            medicineName: "दवा का नाम",
+                            category: "श्रेणी",
+                            dosageForm: "दवा का रूप",
+                            whatFor: "यह दवा किस लिए है",
+                            whyUsed: "क्यों उपयोग की जाती है",
+                            conditions: "आम तौर पर किन स्थितियों में उपयोग होती है",
+                            usage: "उपयोग निर्देश (सामान्य, गैर-प्रिस्क्रिप्टिव)",
+                            sideEffects: "संभावित दुष्प्रभाव",
+                            disclaimerText: "केवल चिकित्सकीय निगरानी में उपयोग करें",
+                            subtitle: "केवल शैक्षिक जानकारी • कोई डोज़/प्रिस्क्रिप्शन सलाह नहीं",
+                        },
+                        ta: {
+                            medicineName: "மருந்தின் பெயர்",
+                            category: "வகை",
+                            dosageForm: "மருந்து வடிவு",
+                            whatFor: "இந்த மருந்து எதற்காக",
+                            whyUsed: "ஏன் பயன்படுத்தப்படுகிறது",
+                            conditions: "சிகிச்சை செய்யப்படும் பொதுவான நிலைகள்",
+                            usage: "பயன்பாட்டு வழிமுறைகள் (பொது)",
+                            sideEffects: "சாத்தியமான பக்க விளைவுகள்",
+                            disclaimerText: "மருத்துவ மேற்பார்வையில் மட்டுமே பயன்படுத்தவும்",
+                            subtitle: "கல்வி நோக்கத்திற்காக மட்டும் • டோஸ்/மருந்து சீட்டு ஆலோசனை இல்லை",
+                        },
+                        te: {
+                            medicineName: "మందు పేరు",
+                            category: "వర్గం",
+                            dosageForm: "మందు రూపం",
+                            whatFor: "ఈ మందు ఏ కోసం",
+                            whyUsed: "ఎందుకు వాడతారు",
+                            conditions: "సాధారణంగా ఉపయోగించే పరిస్థితులు",
+                            usage: "వాడుక సూచనలు (సాధారణ)",
+                            sideEffects: "సంభవించే దుష్ప్రభావాలు",
+                            disclaimerText: "వైద్య పర్యవేక్షణలో మాత్రమే ఉపయోగించండి",
+                            subtitle: "విద్యాపరమైన సమాచారం మాత్రమే • మోతాదు/ప్రిస్క్రిప్షన్ సూచనలు లేవు",
+                        },
+                        bn: {
+                            medicineName: "ওষুধের নাম",
+                            category: "বিভাগ",
+                            dosageForm: "ওষুধের ধরন",
+                            whatFor: "এই ওষুধ কীসের জন্য",
+                            whyUsed: "কেন ব্যবহার করা হয়",
+                            conditions: "সাধারণত যে অবস্থায় ব্যবহার হয়",
+                            usage: "ব্যবহারের নির্দেশনা (সাধারণ)",
+                            sideEffects: "সম্ভাব্য পার্শ্বপ্রতিক্রিয়া",
+                            disclaimerText: "শুধুমাত্র চিকিৎসকের তত্ত্বাবধানে ব্যবহার করুন",
+                            subtitle: "শিক্ষামূলক তথ্য মাত্র • ডোজ/প্রেসক্রিপশন পরামর্শ নয়",
+                        },
+                        mr: {
+                            medicineName: "औषधाचे नाव",
+                            category: "वर्ग",
+                            dosageForm: "औषधाचा प्रकार",
+                            whatFor: "हे औषध कशासाठी",
+                            whyUsed: "का वापरले जाते",
+                            conditions: "सामान्यतः कोणत्या स्थितींमध्ये वापरले जाते",
+                            usage: "वापर सूचना (सामान्य)",
+                            sideEffects: "संभाव्य दुष्परिणाम",
+                            disclaimerText: "केवळ वैद्यकीय देखरेखीखाली वापरा",
+                            subtitle: "फक्त शैक्षणिक माहिती • डोस/प्रिस्क्रिप्शन सल्ला नाही",
+                        },
+                        gu: {
+                            medicineName: "દવાનો નામ",
+                            category: "શ્રેણી",
+                            dosageForm: "દવાનો પ્રકાર",
+                            whatFor: "આ દવા શા માટે છે",
+                            whyUsed: "શા માટે વપરાય છે",
+                            conditions: "સામાન્ય રીતે કઈ સ્થિતિમાં વપરાય છે",
+                            usage: "વાપરવાની સૂચનાઓ (સામાન્ય)",
+                            sideEffects: "શક્ય આડઅસર",
+                            disclaimerText: "માત્ર તબીબી દેખરેખ હેઠળ ઉપયોગ કરો",
+                            subtitle: "માત્ર શૈક્ષણિક માહિતી • ડોઝ/પ્રિસ્ક્રિપ્શન સલાહ નથી",
+                        },
+                        kn: {
+                            medicineName: "ಔಷಧದ ಹೆಸರು",
+                            category: "ವರ್ಗ",
+                            dosageForm: "ಔಷಧ ರೂಪ",
+                            whatFor: "ಈ ಔಷಧ ಯಾವಕ್ಕಾಗಿ",
+                            whyUsed: "ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ",
+                            conditions: "ಸಾಮಾನ್ಯವಾಗಿ ಬಳಸುವ ಸ್ಥಿತಿಗಳು",
+                            usage: "ಬಳಕೆ ಸೂಚನೆಗಳು (ಸಾಮಾನ್ಯ)",
+                            sideEffects: "ಸಂಭಾವ್ಯ ಪಾರ್ಶ್ವ ಪರಿಣಾಮಗಳು",
+                            disclaimerText: "ವೈದ್ಯಕೀಯ ಮೇಲ್ವಿಚಾರಣೆಯಲ್ಲಿ ಮಾತ್ರ ಬಳಸಿ",
+                            subtitle: "ಶೈಕ್ಷಣಿಕ ಮಾಹಿತಿ ಮಾತ್ರ • ಡೋಸ್/ಪ್ರಿಸ್ಕ್ರಿಪ್ಷನ್ ಸಲಹೆ ಇಲ್ಲ",
+                        },
+                    };
+
+                    const catLabels = {
+                        en: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        hi: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        ta: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        te: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        bn: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        mr: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        gu: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                        kn: { general: "General Medicine", gynae: "Gynaecology Medicine" },
+                    };
+
+                    const formLabels = {
+                        en: { tablet: "Tablet", capsule: "Capsule", syrup: "Syrup", injection: "Injection" },
+                        hi: { tablet: "टैबलेट", capsule: "कैप्सूल", syrup: "सिरप", injection: "इंजेक्शन" },
+                        ta: { tablet: "மாத்திரை", capsule: "கேப்சூல்", syrup: "சிரப்", injection: "இஞ்செக்‌ஷன்" },
+                        te: { tablet: "టాబ్లెట్", capsule: "క్యాప్సుల్", syrup: "సిరప్", injection: "ఇంజెక్షన్" },
+                        bn: { tablet: "ট্যাবলেট", capsule: "ক্যাপসুল", syrup: "সিরাপ", injection: "ইনজেকশন" },
+                        mr: { tablet: "टॅब्लेट", capsule: "कॅप्सूल", syrup: "सिरप", injection: "इंजेक्शन" },
+                        gu: { tablet: "ટેબ્લેટ", capsule: "કેપ્સૂલ", syrup: "સીરપ", injection: "ઇન્જેક્શન" },
+                        kn: { tablet: "ಟ್ಯಾಬ್ಲೆಟ್", capsule: "ಕ್ಯಾಪ್ಸೂಲ್", syrup: "ಸಿರಪ್", injection: "ಇಂಜೆಕ್ಷನ್" },
+                    };
+
+                    const templates = {
+                        whyUsed: {
+                            comfort: {
+                                en: "To improve comfort and support day-to-day activity during common illnesses.",
+                                hi: "असुविधा कम करने और दैनिक गतिविधि में मदद के लिए।",
+                            },
+                            infection: {
+                                en: "To help manage infection under qualified medical guidance.",
+                                hi: "योग्य चिकित्सकीय सलाह पर संक्रमण प्रबंधन में मदद के लिए।",
+                            },
+                            nutrition: {
+                                en: "To complement diet during periods of low intake or increased nutritional requirement.",
+                                hi: "कम सेवन या बढ़ी हुई जरूरत के समय आहार को सपोर्ट करने के लिए।",
+                            },
+                            womens: {
+                                en: "To support women’s health needs under specialist supervision when appropriate.",
+                                hi: "उपयुक्त होने पर विशेषज्ञ की निगरानी में महिलाओं के स्वास्थ्य सपोर्ट के लिए।",
+                            }
+                        },
+                        usage: {
+                            general: {
+                                en: "Take exactly as advised by your doctor/pharmacist. Read the label, do not self-medicate, and inform your doctor about other medicines and health conditions.",
+                                hi: "डॉक्टर/फार्मासिस्ट की सलाह के अनुसार ही लें। लेबल पढ़ें, स्वयं दवा न लें, और अन्य दवाओं/बीमारियों की जानकारी डॉक्टर को दें।"
+                            },
+                            injection: {
+                                en: "Injectables are administered by trained healthcare professionals in a clinic/hospital setting only.",
+                                hi: "इंजेक्शन केवल प्रशिक्षित स्वास्थ्यकर्मी द्वारा क्लिनिक/अस्पताल में ही दिए जाते हैं।"
+                            }
+                        },
+                        sideEffects: {
+                            common: {
+                                en: "Possible side effects may include nausea, stomach upset, dizziness, headache, or allergy-related rash. Seek medical help if symptoms are severe or unusual.",
+                                hi: "संभावित दुष्प्रभाव: मतली, पेट खराब, चक्कर, सिरदर्द, या एलर्जी-सम्बंधित रैश। गंभीर/असामान्य लक्षणों पर चिकित्सकीय सहायता लें।"
+                            },
+                            injection: {
+                                en: "Possible side effects may include injection-site pain, redness, swelling, dizziness, or allergy. Seek urgent care for breathing difficulty or severe reactions.",
+                                hi: "संभावित दुष्प्रभाव: इंजेक्शन साइट पर दर्द/लालिमा/सूजन, चक्कर, या एलर्जी। सांस में तकलीफ/गंभीर रिएक्शन पर तुरंत सहायता लें।"
+                            }
+                        }
+                    };
+
+                    const imagesByForm = {
+                        tablet: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=1200",
+                        capsule: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80&w=1200",
+                        syrup: "https://images.unsplash.com/photo-1580281657527-47b1f77a7c0d?auto=format&fit=crop&q=80&w=1200",
+                        injection: "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?auto=format&fit=crop&q=80&w=1200"
+                    };
+
+                    const catalogue = [
+                        // GENERAL MEDICINE (TABLETS) - 10
+                        { id: "gen_tab_fever_pain", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Pain & Fever", name: { en: "Fever / Pain relief tablets", hi: "बुखार / दर्द से राहत टैबलेट" }, whatFor: { en: "Temporary relief from fever and mild-to-moderate pain.", hi: "बुखार और हल्के/मध्यम दर्द से अस्थायी राहत।" }, why: "comfort", conditions: ["Fever", "Headache", "Body ache", "Toothache", "Muscle pain"] },
+                        { id: "gen_tab_antibiotic", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Infection Care", name: { en: "Antibiotic tablets", hi: "एंटीबायोटिक टैबलेट" }, whatFor: { en: "For bacterial infections when prescribed by a qualified clinician.", hi: "योग्य चिकित्सक की सलाह पर बैक्टीरियल संक्रमण के लिए।" }, why: "infection", conditions: ["Throat infection", "Skin infection", "Urinary infection (UTI)", "Bacterial sinusitis", "Bacterial chest infection"] },
+                        { id: "gen_tab_cold_cough", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Cold & Cough", name: { en: "Cold & cough tablets", hi: "सर्दी-खांसी टैबलेट" }, whatFor: { en: "Relief of common cold symptoms like cough, runny nose, and congestion.", hi: "खांसी, नाक बहना, जकड़न जैसे लक्षणों से राहत के लिए।" }, why: "comfort", conditions: ["Common cold", "Nasal congestion", "Dry cough", "Sore throat irritation", "Seasonal viral symptoms"] },
+                        { id: "gen_tab_gastric", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Digestive Care", name: { en: "Gastric / acidity tablets", hi: "गैस्ट्रिक / एसिडिटी टैबलेट" }, whatFor: { en: "Used to reduce acidity-related discomfort such as heartburn and indigestion.", hi: "सीने में जलन और अपच जैसी परेशानी कम करने के लिए।" }, why: "comfort", conditions: ["Acidity", "Heartburn", "GERD symptoms", "Indigestion", "Gastritis (doctor-advised)"] },
+                        { id: "gen_tab_allergy", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Allergy Relief", name: { en: "Allergy tablets", hi: "एलर्जी टैबलेट" }, whatFor: { en: "Relief from allergy symptoms such as sneezing, itching, and watery eyes.", hi: "छींक, खुजली, आंखों से पानी जैसे लक्षणों से राहत के लिए।" }, why: "comfort", conditions: ["Allergic rhinitis", "Sneezing", "Watery eyes", "Itchy skin (allergy-related)", "Seasonal allergy symptoms"] },
+                        { id: "gen_tab_bp", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Heart Care", name: { en: "Blood pressure tablets", hi: "ब्लड प्रेशर टैबलेट" }, whatFor: { en: "Helps manage high blood pressure as part of a doctor-guided plan.", hi: "डॉक्टर की देखरेख में हाई BP प्रबंधन के लिए।" }, why: "comfort", conditions: ["Hypertension (high BP)", "Doctor-advised BP control", "Heart risk management"] },
+                        { id: "gen_tab_diabetes", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Sugar Control", name: { en: "Diabetes tablets", hi: "डायबिटीज टैबलेट" }, whatFor: { en: "Helps manage blood sugar in type 2 diabetes under medical guidance.", hi: "चिकित्सकीय सलाह पर टाइप 2 डायबिटीज में शुगर प्रबंधन के लिए।" }, why: "comfort", conditions: ["Type 2 diabetes (doctor diagnosed)", "High blood sugar management"] },
+                        { id: "gen_tab_vitamins", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Nutrition", name: { en: "Vitamin & mineral tablets", hi: "विटामिन और मिनरल टैबलेट" }, whatFor: { en: "Supports nutrition and helps address vitamin/mineral insufficiency when advised.", hi: "पोषण सपोर्ट और विटामिन/मिनरल की कमी में सहायता के लिए।" }, why: "nutrition", conditions: ["Low dietary intake", "General weakness due to low intake", "Vitamin insufficiency (doctor advised)"] },
+                        { id: "gen_tab_liver", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Liver Support", name: { en: "Liver support tablets", hi: "लिवर सपोर्ट टैबलेट" }, whatFor: { en: "Supportive care for liver health as advised by a clinician.", hi: "चिकित्सक की सलाह पर लिवर-स्वास्थ्य सपोर्ट के लिए।" }, why: "comfort", conditions: ["Fatty liver (doctor advised)", "Liver function support", "Digestive comfort support (doctor advised)"] },
+                        { id: "gen_tab_infection_control", tab: "tablets", form: "tablet", cat: "general", badge: "Tablet", tag: "Infection Control", name: { en: "Infection control tablets", hi: "इन्फेक्शन कंट्रोल टैबलेट" }, whatFor: { en: "Used for infection management as advised by a healthcare professional.", hi: "स्वास्थ्य विशेषज्ञ की सलाह पर संक्रमण प्रबंधन के लिए।" }, why: "infection", conditions: ["Doctor-diagnosed infections", "Inflammation due to infection (doctor advised)"] },
+
+                        // GENERAL MEDICINE (SYRUPS) - 5
+                        { id: "gen_syr_cough", tab: "syrups", form: "syrup", cat: "general", badge: "Syrup", tag: "Respiratory", name: { en: "Cough syrup", hi: "खांसी का सिरप" }, whatFor: { en: "Symptomatic relief from cough and throat irritation.", hi: "खांसी और गले की खराश/जलन में लक्षणात्मक राहत।" }, why: "comfort", conditions: ["Dry cough", "Throat irritation", "Common cold symptoms"] },
+                        { id: "gen_syr_multivitamin", tab: "syrups", form: "syrup", cat: "general", badge: "Syrup", tag: "Nutrition", name: { en: "Multivitamin syrup", hi: "मल्टीविटामिन सिरप" }, whatFor: { en: "Nutritional support for people who prefer liquid supplements (as advised).", hi: "तरल सप्लिमेंट पसंद करने वालों के लिए पोषण सपोर्ट।" }, why: "nutrition", conditions: ["Low dietary intake", "General weakness due to low intake"] },
+                        { id: "gen_syr_iron", tab: "syrups", form: "syrup", cat: "general", badge: "Syrup", tag: "Iron Support", name: { en: "Iron tonic syrup", hi: "आयरन टॉनिक सिरप" }, whatFor: { en: "Support for iron deficiency/low haemoglobin when advised.", hi: "आयरन की कमी/कम हीमोग्लोबिन में सपोर्ट।" }, why: "nutrition", conditions: ["Iron deficiency anaemia (doctor diagnosed)", "Low haemoglobin (doctor advised)"] },
+                        { id: "gen_syr_digestive", tab: "syrups", form: "syrup", cat: "general", badge: "Syrup", tag: "Digestive Care", name: { en: "Digestive syrup", hi: "पाचन सिरप" }, whatFor: { en: "Support for digestion-related discomfort such as bloating or heaviness (as advised).", hi: "पेट फूलना/भारीपन जैसी असुविधा में सपोर्ट।" }, why: "comfort", conditions: ["Bloating", "Indigestion", "Heaviness after meals"] },
+                        { id: "gen_syr_pediatric", tab: "syrups", form: "syrup", cat: "general", badge: "Syrup", tag: "Pediatric", name: { en: "Pediatric fever syrup", hi: "बच्चों के लिए बुखार सिरप" }, whatFor: { en: "Supportive relief for fever in children under doctor/label guidance.", hi: "डॉक्टर/लेबल मार्गदर्शन के अनुसार बच्चों में बुखार में राहत।" }, why: "comfort", conditions: ["Fever in viral illness", "Fever with cold symptoms (doctor advised)"] },
+
+                        // GENERAL MEDICINE (INJECTABLES) - 5
+                        { id: "gen_inj_antibiotic", tab: "injectables", form: "injection", cat: "general", badge: "Injection", tag: "Infection Care", name: { en: "Antibiotic injections", hi: "एंटीबायोटिक इंजेक्शन" }, whatFor: { en: "Clinic/hospital use for bacterial infections as prescribed.", hi: "प्रिस्क्रिप्शन पर अस्पताल/क्लिनिक में बैक्टीरियल संक्रमण के लिए।" }, why: "infection", conditions: ["Severe bacterial infections (doctor prescribed)", "Hospital-guided infection management"] },
+                        { id: "gen_inj_pain", tab: "injectables", form: "injection", cat: "general", badge: "Injection", tag: "Pain Care", name: { en: "Pain relief injections", hi: "दर्द निवारक इंजेक्शन" }, whatFor: { en: "Short-term pain relief in clinical settings under supervision.", hi: "निगरानी में क्लिनिकल सेटिंग में अल्पकालिक दर्द राहत के लिए।" }, why: "comfort", conditions: ["Acute pain episodes (doctor supervised)", "Post-procedure pain (doctor advised)"] },
+                        { id: "gen_inj_iv", tab: "injectables", form: "injection", cat: "general", badge: "Injection", tag: "Hospital Care", name: { en: "IV fluids", hi: "IV फ्लुइड्स" }, whatFor: { en: "Intravenous fluid support in hospitals/clinics as directed.", hi: "निर्देशानुसार अस्पताल/क्लिनिक में अंत:शिरा तरल सपोर्ट।" }, why: "comfort", conditions: ["Dehydration (doctor assessed)", "Support during illness/procedure (hospital use)"] },
+                        { id: "gen_inj_gastric", tab: "injectables", form: "injection", cat: "general", badge: "Injection", tag: "Digestive Care", name: { en: "Gastric injections", hi: "गैस्ट्रिक इंजेक्शन" }, whatFor: { en: "Clinical use for acidity/ulcer-related care as prescribed.", hi: "प्रिस्क्रिप्शन पर एसिडिटी/अल्सर संबंधित देखभाल।" }, why: "comfort", conditions: ["Severe acidity (doctor advised)", "Ulcer/GERD management (hospital use)"] },
+                        { id: "gen_inj_emergency", tab: "injectables", form: "injection", cat: "general", badge: "Injection", tag: "Emergency", name: { en: "Emergency care injections", hi: "इमरजेंसी केयर इंजेक्शन" }, whatFor: { en: "Used in emergency settings by qualified healthcare professionals.", hi: "योग्य स्वास्थ्यकर्मियों द्वारा इमरजेंसी सेटिंग में उपयोग।" }, why: "comfort", conditions: ["Emergency supportive care (hospital use)", "Doctor-directed acute care"] },
+
+                        // GYNAECOLOGY MEDICINE (TABLETS/CAPSULES) - 10
+                        { id: "gyn_tab_menstrual", tab: "tablets", form: "tablet", cat: "gynae", badge: "Tablet", tag: "Women’s Health", name: { en: "Menstrual regulation tablets", hi: "मासिक धर्म नियमन टैबलेट" }, whatFor: { en: "Support for menstrual cycle-related concerns under gynaecologist guidance.", hi: "स्त्रीरोग विशेषज्ञ की सलाह पर चक्र संबंधित समस्याओं में सपोर्ट।" }, why: "womens", conditions: ["Irregular periods (doctor evaluated)", "Cycle-related discomfort (doctor advised)"] },
+                        { id: "gyn_tab_pcos", tab: "tablets", form: "tablet", cat: "gynae", badge: "Tablet", tag: "PCOS Support", name: { en: "PCOS support tablets", hi: "PCOS सपोर्ट टैबलेट" }, whatFor: { en: "Supportive care for PCOS-related concerns under medical guidance.", hi: "चिकित्सकीय सलाह पर PCOS संबंधित सपोर्टिव केयर।" }, why: "womens", conditions: ["PCOS (doctor diagnosed)", "Irregular cycle in PCOS (doctor advised)"] },
+                        { id: "gyn_tab_iron", tab: "tablets", form: "tablet", cat: "gynae", badge: "Tablet", tag: "Anaemia Support", name: { en: "Iron & folic acid tablets", hi: "आयरन और फोलिक एसिड टैबलेट" }, whatFor: { en: "Support for iron/folate deficiency and anaemia prevention under guidance.", hi: "आयरन/फोलेट की कमी और एनीमिया रोकथाम में सपोर्ट।" }, why: "nutrition", conditions: ["Iron deficiency anaemia", "Low haemoglobin", "Folate insufficiency (doctor advised)"] },
+                        { id: "gyn_tab_hormonal", tab: "tablets", form: "tablet", cat: "gynae", badge: "Tablet", tag: "Hormonal Care", name: { en: "Hormonal balance tablets", hi: "हार्मोनल बैलेंस टैबलेट" }, whatFor: { en: "Support for hormone-related concerns under specialist supervision.", hi: "विशेषज्ञ की निगरानी में हार्मोन संबंधित सपोर्ट।" }, why: "womens", conditions: ["Hormonal imbalance (doctor evaluated)", "Cycle irregularity (doctor advised)"] },
+                        { id: "gyn_cap_pregnancy", tab: "capsules", form: "capsule", cat: "gynae", badge: "Capsule", tag: "Pregnancy Care", name: { en: "Pregnancy support supplements", hi: "प्रेग्नेंसी सपोर्ट सप्लिमेंट" }, whatFor: { en: "Nutritional support in pregnancy as advised by an obstetrician.", hi: "प्रसूति विशेषज्ञ की सलाह पर गर्भावस्था में पोषण सपोर्ट।" }, why: "nutrition", conditions: ["Prenatal supplementation (doctor advised)", "Pregnancy nutrition support (doctor advised)"] },
+                        { id: "gyn_tab_calcium", tab: "tablets", form: "tablet", cat: "gynae", badge: "Tablet", tag: "Bone Health", name: { en: "Calcium tablets", hi: "कैल्शियम टैबलेट" }, whatFor: { en: "Support for bone health and calcium/vitamin D insufficiency when advised.", hi: "हड्डियों के स्वास्थ्य और कैल्शियम/विटामिन D की कमी में सपोर्ट।" }, why: "nutrition", conditions: ["Calcium insufficiency (doctor advised)", "Bone health support"] },
+                        { id: "gyn_cap_fertility", tab: "capsules", form: "capsule", cat: "gynae", badge: "Capsule", tag: "Fertility", name: { en: "Fertility support medicines", hi: "फर्टिलिटी सपोर्ट दवा" }, whatFor: { en: "Support in fertility-related care under specialist supervision.", hi: "विशेषज्ञ की निगरानी में फर्टिलिटी संबंधित सपोर्ट।" }, why: "womens", conditions: ["Fertility care (specialist advised)", "Preconception support (doctor advised)"] },
+                        { id: "gyn_tab_uti", tab: "tablets", form: "tablet", cat: "gynae", badge: "Tablet", tag: "Urinary Care", name: { en: "UTI prevention tablets", hi: "UTI रोकथाम टैबलेट" }, whatFor: { en: "Support for UTI prevention strategies as advised by a clinician.", hi: "चिकित्सक की सलाह पर UTI रोकथाम में सपोर्ट।" }, why: "womens", conditions: ["Recurrent UTI prevention (doctor advised)", "Urinary discomfort (doctor evaluated)"] },
+                        { id: "gyn_cap_post_delivery", tab: "capsules", form: "capsule", cat: "gynae", badge: "Capsule", tag: "Recovery", name: { en: "Post-delivery recovery tablets", hi: "डिलीवरी के बाद रिकवरी सपोर्ट" }, whatFor: { en: "Nutritional and recovery support after delivery as advised.", hi: "डिलीवरी के बाद रिकवरी में पोषण/सपोर्ट (सलाह अनुसार)।" }, why: "nutrition", conditions: ["Postpartum recovery support (doctor advised)"] },
+                        { id: "gyn_cap_lactation", tab: "capsules", form: "capsule", cat: "gynae", badge: "Capsule", tag: "Lactation", name: { en: "Lactation support medicines", hi: "लैक्टेशन सपोर्ट दवा" }, whatFor: { en: "Support for lactation concerns under doctor guidance.", hi: "डॉक्टर की सलाह पर स्तनपान (लैक्टेशन) संबंधित सपोर्ट।" }, why: "womens", conditions: ["Lactation support (doctor advised)", "Postpartum support (doctor advised)"] },
+
+                        // GYNAECOLOGY MEDICINE (INJECTABLES) - 3
+                        { id: "gyn_inj_hormonal", tab: "injectables", form: "injection", cat: "gynae", badge: "Injection", tag: "Hormonal Care", name: { en: "Hormonal injections", hi: "हार्मोनल इंजेक्शन" }, whatFor: { en: "Specialist-prescribed hormonal therapy administered under supervision.", hi: "विशेषज्ञ द्वारा प्रिस्क्राइब हार्मोनल थेरपी (निगरानी में)।" }, why: "womens", conditions: ["Hormonal therapy (specialist prescribed)", "Gynaecology care (doctor advised)"] },
+                        { id: "gyn_inj_pregnancy", tab: "injectables", form: "injection", cat: "gynae", badge: "Injection", tag: "Pregnancy Care", name: { en: "Pregnancy support injections", hi: "प्रेग्नेंसी सपोर्ट इंजेक्शन" }, whatFor: { en: "Obstetrician-directed supportive injections used in specific clinical situations.", hi: "कुछ विशिष्ट स्थितियों में प्रसूति विशेषज्ञ द्वारा निर्देशित सपोर्टिव इंजेक्शन।" }, why: "womens", conditions: ["Doctor-directed pregnancy support (clinic/hospital)", "High-risk pregnancy care (specialist advised)"] },
+                        { id: "gyn_inj_emergency_ob", tab: "injectables", form: "injection", cat: "gynae", badge: "Injection", tag: "Emergency", name: { en: "Emergency obstetric injections", hi: "इमरजेंसी ऑब्स्टेट्रिक इंजेक्शन" }, whatFor: { en: "Emergency obstetric medicines used by trained professionals in hospital settings.", hi: "अस्पताल में प्रशिक्षित स्वास्थ्यकर्मियों द्वारा उपयोग होने वाली आपात प्रसूति दवाएं।" }, why: "womens", conditions: ["Emergency obstetric care (hospital use)", "Doctor-directed acute care"] },
+                    ];
+
+                    // --------------------------------------------------
+                    // DOM
+                    // --------------------------------------------------
+                    const grid = document.getElementById('product-grid');
+                    const backdrop = document.getElementById('product-modal-backdrop');
+                    const modalClose = document.getElementById('product-modal-close');
+                    const modalBody = document.getElementById('product-modal-body');
+                    const modalTitle = document.getElementById('product-modal-title');
+                    const modalSubtitle = document.getElementById('product-modal-subtitle');
+                    const langSelect = document.getElementById('product-lang');
+
+                    let currentLang = 'en';
+                    let currentProductId = null;
+
+                    function safeLang(lang) {
+                        return SUPPORTED_LANGS.includes(lang) ? lang : 'en';
+                    }
+
+                    function getTextMap(map, lang) {
+                        if (!map) return "";
+                        return map[lang] || map.en || "";
+                    }
+
+                    function escapeHtml(str) {
+                        return String(str)
+                            .replace(/&/g, "&amp;")
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/"/g, "&quot;")
+                            .replace(/'/g, "&#039;");
+                    }
+
+                    function buildCard(item) {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'product-card reveal zoom-in';
+                        wrapper.setAttribute('data-category', item.tab);
+                        wrapper.setAttribute('data-med-category', item.cat);
+                        wrapper.setAttribute('data-product-id', item.id);
+
+                        const imageUrl = imagesByForm[item.form] || imagesByForm.tablet;
+                        const badgeText = item.badge;
+
+                        wrapper.innerHTML = `
+                            <div class="product-img">
+                                <div class="product-media">
+                                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+                                        <rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect>
+                                        <path d="M8 12h8"></path>
+                                        <path d="M12 8v8"></path>
+                                    </svg>
+                                    <img src="${imageUrl}" alt="${escapeHtml(getTextMap(item.name, 'en'))} (pharmaceutical product)" loading="lazy"
+                                         onerror="this.style.display='none';" />
+                                    <span class="category-tag">${escapeHtml(badgeText)}</span>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>${escapeHtml(getTextMap(item.name, 'en'))}</h3>
+                                <p>${escapeHtml(catLabels.en[item.cat] || item.cat)}</p>
+                                <div class="product-meta">
+                                    <span class="pill-tag">${escapeHtml(item.tag)}</span>
+                                    <button class="btn-text" data-action="view-details" data-product-id="${escapeHtml(item.id)}">View Details &rarr;</button>
+                                </div>
+                            </div>
+                        `;
+
+                        return wrapper;
+                    }
+
+                    function renderCards() {
+                        if (!grid) return;
+                        const fragment = document.createDocumentFragment();
+                        catalogue.forEach(item => fragment.appendChild(buildCard(item)));
+                        grid.appendChild(fragment);
+                    }
+
+                    function openModal(productId) {
+                        currentProductId = productId;
+                        renderModalContent();
+                        backdrop.classList.add('active');
+                        backdrop.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden';
+                    }
+
+                    function closeModal() {
+                        backdrop.classList.remove('active');
+                        backdrop.setAttribute('aria-hidden', 'true');
+                        document.body.style.overflow = '';
+                        currentProductId = null;
+                    }
+
+                    function renderModalContent() {
+                        const lang = safeLang(currentLang);
+                        modalSubtitle.textContent = (labels[lang] && labels[lang].subtitle) || labels.en.subtitle;
+
+                        const item = catalogue.find(p => p.id === currentProductId);
+                        if (!item) {
+                            modalTitle.textContent = "Product Details";
+                            modalBody.innerHTML = "";
+                            return;
+                        }
+
+                        const medName = getTextMap(item.name, lang) || getTextMap(item.name, 'en');
+                        const whatFor = getTextMap(item.whatFor, lang) || getTextMap(item.whatFor, 'en');
+                        const whyT = (templates.whyUsed[item.why] && (templates.whyUsed[item.why][lang] || templates.whyUsed[item.why].en)) || "";
+                        const usageT = (item.form === 'injection')
+                            ? ((templates.usage.injection[lang] || templates.usage.injection.en))
+                            : ((templates.usage.general[lang] || templates.usage.general.en));
+                        const sideT = (item.form === 'injection')
+                            ? ((templates.sideEffects.injection[lang] || templates.sideEffects.injection.en))
+                            : ((templates.sideEffects.common[lang] || templates.sideEffects.common.en));
+
+                        modalTitle.textContent = medName;
+
+                        const catText = (catLabels[lang] && catLabels[lang][item.cat]) || (catLabels.en[item.cat] || item.cat);
+                        const formText = (formLabels[lang] && formLabels[lang][item.form]) || (formLabels.en[item.form] || item.form);
+
+                        modalBody.innerHTML = `
+                            <div class="detail-grid">
+                                <div class="detail-card">
+                                    <h4>${escapeHtml(labels[lang]?.whatFor || labels.en.whatFor)}</h4>
+                                    <p>${escapeHtml(whatFor)}</p>
+
+                                    <h4 style="margin-top:14px;">${escapeHtml(labels[lang]?.whyUsed || labels.en.whyUsed)}</h4>
+                                    <p>${escapeHtml(whyT)}</p>
+
+                                    <h4 style="margin-top:14px;">${escapeHtml(labels[lang]?.conditions || labels.en.conditions)}</h4>
+                                    <ul class="detail-list">
+                                        ${item.conditions.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+                                    </ul>
+                                </div>
+
+                                <div class="detail-card">
+                                    <h4>${escapeHtml(labels[lang]?.medicineName || labels.en.medicineName)}</h4>
+                                    <dl class="kv">
+                                        <dt>${escapeHtml(labels[lang]?.medicineName || labels.en.medicineName)}</dt>
+                                        <dd>${escapeHtml(medName)}</dd>
+
+                                        <dt>${escapeHtml(labels[lang]?.category || labels.en.category)}</dt>
+                                        <dd>${escapeHtml(catText)}</dd>
+
+                                        <dt>${escapeHtml(labels[lang]?.dosageForm || labels.en.dosageForm)}</dt>
+                                        <dd>${escapeHtml(formText)}</dd>
+                                    </dl>
+
+                                    <h4 style="margin-top:14px;">${escapeHtml(labels[lang]?.usage || labels.en.usage)}</h4>
+                                    <p>${escapeHtml(usageT)}</p>
+
+                                    <h4 style="margin-top:14px;">${escapeHtml(labels[lang]?.sideEffects || labels.en.sideEffects)}</h4>
+                                    <p>${escapeHtml(sideT)}</p>
+
+                                    <div class="compliance-note">
+                                        ${escapeHtml(labels[lang]?.disclaimerText || labels.en.disclaimerText)}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // --------------------------------------------------
+                    // Init
+                    // --------------------------------------------------
+                    renderCards();
+
+                    // Events: open details
+                    grid.addEventListener('click', (e) => {
+                        const btn = e.target.closest('button[data-action="view-details"]');
+                        if (!btn) return;
+                        const productId = btn.getAttribute('data-product-id');
+                        if (productId) openModal(productId);
+                    });
+
+                    // Modal close
+                    modalClose.addEventListener('click', closeModal);
+                    backdrop.addEventListener('click', (e) => {
+                        if (e.target === backdrop) closeModal();
+                    });
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && backdrop.classList.contains('active')) closeModal();
+                    });
+
+                    // Language switch (top-right)
+                    langSelect.addEventListener('change', (e) => {
+                        currentLang = safeLang(e.target.value);
+                        if (currentProductId) renderModalContent();
+                    });
+                })();
+            </script>
         </div>
     </section>
 
